@@ -13,7 +13,7 @@ export class HomepageService {
   _data: any = null;
 
   private handleError: HandleError;
-  url = 'https://gesab001.github.io/assets/homeschool/math/math_year_1.json';
+  url = 'https://gesab001.github.io/assets/homeschool/';
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -24,10 +24,11 @@ export class HomepageService {
     this._data = null;
   }
 
-  getData() {
+  getData(path) {
+    this.clearCache();
     if (!this._data) {
       this._data = this.http
-        .get(this.url)
+        .get(this.url+path)
         .pipe(publishReplay(1), refCount());
     }
     return this._data;

@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'homeschool';
-  selectedSubject = 'math_';
+  selectedSubject = 'math';
   selectedYear = 'kindergarten';
 }
