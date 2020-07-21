@@ -1,1 +1,14 @@
-<p>homepage works!</p>
+ 
+<div class="container-fluid">
+    <div class="card-columns">
+      <div class="card" *ngFor="let item of lessons">
+        <div class="card-header">{{item.letter}} | {{item.title}}</div>
+        <div class="card-body">
+             <div class="list-group">
+              <a href="#" *ngFor="let activity of item.activities" class="list-group-item list-group-item-action">{{item.letter}}.{{activity.number}} {{activity.title}}</a>
+            </div> 
+        </div> 
+
+      </div>
+    </div>
+</div>
