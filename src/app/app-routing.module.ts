@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomepageComponent} from './homepage/homepage.component';
+import {QuizComponent} from './quiz/quiz.component';
 
 const routes: Routes = [
-   {path: '', component: HomepageComponent}
+   {path: 'homepage/:subject/:year', component: HomepageComponent},
+   {path: 'quiz/:subject/:year/:letter/:number', component: QuizComponent}
   ];
 
 @NgModule({

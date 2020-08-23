@@ -7,10 +7,12 @@
         </div>
         <div class="card-body">
              <div class="list-group list-group-flush">
-              <a href="#" *ngFor="let activity of item.activities" class="list-group-item list-group-item-action">{{item.letter}}.{{activity.number}} {{activity.title}}</a>
+              <a [routerLink]="['/quiz', subjectletter, yearnumber, item.letter, activity.number]" routerLinkActive="active" *ngFor="let activity of item.activities" class="list-group-item list-group-item-action">{{item.letter}}.{{activity.number}} {{activity.title}}</a>
             </div> 
         </div> 
 
       </div>
     </div>
 </div>
+
+

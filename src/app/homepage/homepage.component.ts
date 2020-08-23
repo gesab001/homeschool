@@ -1,4 +1,4 @@
-import { Component,  Input, OnChanges, SimpleChanges,ViewChild, OnInit } from '@angular/core';
+import { Component,  Input, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Homepage } from './homepage';
 import { HomepageService} from './homepage.service';
@@ -12,24 +12,28 @@ import {Observable} from 'rxjs';
   styleUrls: ['./homepage.component.css'],
   providers: [HomepageService]
 })
-export class HomepageComponent implements OnInit, OnChanges {
-  @Input() subjectYear: any;
+export class HomepageComponent implements OnInit {
+
   lessons: any;
   subject: string;
+  subjectletter: string;
   year: string;
+  yearnumber: string;
   subscription;
   path: string;
   constructor(private route: ActivatedRoute, private homepageService: HomepageService) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-         this.subject = changes.subjectYear.currentValue.subject;
-         this.year = changes.subjectYear.currentValue.year;
-         this.path = "/"+this.subject+"/"+this.subject+"_"+this.year+".json";
-         this.loadData();
-   }
-
   ngOnInit(): void {
-     this.loadData();
+     this.route.paramMap.subscribe(params => { 
+          this.subject = params.get('subject');
+          this.subjectletter = this.subject.charAt(0).toLowerCase();
+          this.year = params.get('year');
+          this.yearnumber = this.year.split("_")[1];
+          this.path = "/"+this.subject+"/"+this.subject+"_"+this.year+".json";
+          this.loadData();
+       }
+     );
+
   }
 
  loadData() {
@@ -38,6 +42,8 @@ export class HomepageComponent implements OnInit, OnChanges {
       error => console.log(error),
     );
   }
+
+
 }
 
 

@@ -33,6 +33,6 @@
 
 </nav>
 
-<p>{{selectedSubject}}{{selectedYear}}</p>
-<app-homepage [subjectYear]="{subject: selectedSubject, year: selectedYear}"></app-homepage>
+<a [routerLink]="['/homepage', selectedSubject, selectedYear]" routerLinkActive="active">{{selectedSubject}}, {{selectedYear}} </a>
+
 <router-outlet></router-outlet>
