@@ -9,6 +9,10 @@ import { QuizService} from './quiz.service';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
+  icon: string;
+  iconIndex: number;
+  totalIcons: number;
+  icons: any;
   quizkey: string;
   questions: any;
   shuffledQuestions: any;
@@ -17,6 +21,7 @@ export class QuizComponent implements OnInit {
   correct: string = "";
   mistakes: number = 0;
   answer: string = "";
+  answerint: number = 3;
   subscription;
   letterchoices: any = ['A', 'B', 'C', 'D'];
   questionNumber: number = 0;
@@ -24,10 +29,29 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-     this.loadData();
-     this.route.paramMap.subscribe(params => { this.quizkey = params.get('subject') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');});
-     this.shuffleChoices();
-     this.setCorrectAnswer();
+
+     this.route.paramMap.subscribe(params => { 
+          this.quizkey = params.get('subject') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');
+          this.loadData();
+          this.shuffleChoices();
+          this.correct = this.getCorrectAnswer();
+     });
+     this.icons = ["fa fa-ambulance", "fa fa-plane", "fa fa-bicycle", "fa fa-horse", "fa fa-car-side", "fa fa-truck", "fa fa-train"];
+     this.totalIcons = this.icons.length;
+     this.setIcon();
+ 
+
+     
+     
+  }
+
+  getRandomNumberBetween(min,max){
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+  setIcon(){
+     this.iconIndex = this.getRandomNumberBetween(0, this.totalIcons-1);
+     this.icon = this.icons[this.iconIndex];
   }
 
  loadData() {
@@ -35,15 +59,28 @@ export class QuizComponent implements OnInit {
       res => (this.questions = res[this.quizkey]["questions"]),
       error => console.log(error),
     );
+    this.setCorrectAnswer();
   }
 
   setCorrectAnswer(){
     this.correct = this.questions[this.questionNumber].answer;
+    this.answerint = Number(this.correct);
+  }
+
+  getCorrectAnswer(){
+    this.correct = this.questions[this.questionNumber].answer;
+    return this.correct;
   }
 
   setAnswer(event){
      this.answer = event;
+
   }
+
+  getNumberOfImages(){
+     return Number(this.correct);
+  }
+   
   
   shuffleChoices(){
       for (var x=0; x<this.questions.length; x++){
@@ -53,11 +90,10 @@ export class QuizComponent implements OnInit {
 
  
 
-  getRandomNumberBetween(min,max){
-        return Math.floor(Math.random()*(max-min+1)+min);
-    }
+
 
   onSubmit(){
+    this.setIcon();
     if (this.questionNumber==19){
         this.cardType = "scoreCard";
     }
