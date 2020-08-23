@@ -14,7 +14,8 @@ export class QuizService {
   _data: any = null;
 
   private handleError: HandleError;
-  url = 'https://gesab001.github.io/assets/homeschool/math/math_questions.json';
+
+  url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/math/math_questions.json';
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {

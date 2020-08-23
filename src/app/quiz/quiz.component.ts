@@ -58,7 +58,7 @@ export class QuizComponent implements OnInit {
     }
 
   onSubmit(){
-    if (this.questionNumber==4){
+    if (this.questionNumber==19){
         this.cardType = "scoreCard";
     }
     if (this.answer==""){
