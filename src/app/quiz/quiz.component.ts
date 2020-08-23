@@ -10,7 +10,7 @@ import { QuizService} from './quiz.service';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
-
+  questionType: string;
   icon: any;
   iconIndex: number;
   totalIcons: number;
@@ -56,7 +56,7 @@ export class QuizComponent implements OnInit {
 
  loadData() {
     this.subscription = this.quizService.getData().subscribe(
-      res => (this.questions = res[this.quizkey]["questions"], this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex]),
+      res => (this.questions = res[this.quizkey]["questions"], this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"], this.setCorrectAnswer()),
       error => console.log(error),
     );
     this.setCorrectAnswer();
