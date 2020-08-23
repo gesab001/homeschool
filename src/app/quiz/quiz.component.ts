@@ -14,6 +14,8 @@ export class QuizComponent implements OnInit {
   icon: any;
   iconIndex: number;
   totalIcons: number;
+  leftNumber: number;
+  rightNumber: number;
   icons: any;
   quizkey: string;
   questions: any;
@@ -39,6 +41,7 @@ export class QuizComponent implements OnInit {
           this.loadData();
           this.shuffleChoices();
           this.correct = this.getCorrectAnswer();
+
           
      });
 
@@ -59,8 +62,6 @@ export class QuizComponent implements OnInit {
       res => (this.questions = res[this.quizkey]["questions"], this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"], this.setCorrectAnswer()),
       error => console.log(error),
     );
-    this.setCorrectAnswer();
-    this.setIcon();
   }
 
   setCorrectAnswer(){
