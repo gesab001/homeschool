@@ -1,5 +1,6 @@
 <div  class="container-fluid" [ngSwitch]="cardType">
-  <h2 class="display-1" >Math Quiz {{correct}}</h2>
+  <h2 class="display-1" >Math Quiz {{totalIcons}} {{icon.name}} </h2>
+
             <button type="button" (click)="setCorrectAnswer()" class="btn btn-warning">Start</button>
 
   <div *ngSwitchCase="'questionCard'" class="card" >
@@ -8,7 +9,8 @@
     </div>
     <div class="card-body">
         <div class="d-flex flex-wrap" >
-           <div *ngFor="let item of [].constructor(getNumberOfImages()); let i = index" class="{{icon}} p-2"></div>
+           <div *ngFor="let item of [].constructor(getNumberOfImages()); let i = index" class="{{icon.name}} p-2"></div>
+          
         </div>
         <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
             <br>

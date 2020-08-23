@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService} from './quiz.service';
 
+
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -9,7 +10,8 @@ import { QuizService} from './quiz.service';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
-  icon: string;
+
+  icon: any;
   iconIndex: number;
   totalIcons: number;
   icons: any;
@@ -26,7 +28,9 @@ export class QuizComponent implements OnInit {
   letterchoices: any = ['A', 'B', 'C', 'D'];
   questionNumber: number = 0;
   congrats: any = ["correct", "excellent", "awesome", "well done", "great job", "fantastic", "all right!", "exactly right", "exceptional", "sensational", "wonderful", "fabulous", "outstanding", "You're learning fast", "perfect", "You're doing well", "Unbelievable", "Way to go", "Marvelous", "Good for you", "That's great"];
-  constructor(private quizService: QuizService, private route: ActivatedRoute) { }
+  constructor(private quizService: QuizService, private route: ActivatedRoute) { 
+ 
+  }
 
   ngOnInit(): void {
 
@@ -35,14 +39,10 @@ export class QuizComponent implements OnInit {
           this.loadData();
           this.shuffleChoices();
           this.correct = this.getCorrectAnswer();
+          
      });
-     this.icons = ["fa fa-ambulance", "fa fa-plane", "fa fa-bicycle", "fa fa-horse", "fa fa-car-side", "fa fa-truck", "fa fa-train"];
-     this.totalIcons = this.icons.length;
-     this.setIcon();
- 
 
-     
-     
+
   }
 
   getRandomNumberBetween(min,max){
@@ -56,10 +56,11 @@ export class QuizComponent implements OnInit {
 
  loadData() {
     this.subscription = this.quizService.getData().subscribe(
-      res => (this.questions = res[this.quizkey]["questions"]),
+      res => (this.questions = res[this.quizkey]["questions"], this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex]),
       error => console.log(error),
     );
     this.setCorrectAnswer();
+    this.setIcon();
   }
 
   setCorrectAnswer(){

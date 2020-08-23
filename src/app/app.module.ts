@@ -29,6 +29,7 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuizComponent } from './quiz/quiz.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { QuizComponent } from './quiz/quiz.component';
     MatTableModule,
     MatGridListModule,
     DeviceDetectorModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FontAwesomeModule
   ],
   providers: [HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
