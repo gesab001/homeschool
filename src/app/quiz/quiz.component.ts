@@ -16,10 +16,12 @@ export class QuizComponent implements OnInit {
   totalIcons: number;
   leftNumber: number;
   rightNumber: number;
+  numbers: any = []; 
+  random20numbers: any = [];
   icons: any;
   quizkey: string;
   questions: any;
-  shuffledQuestions: any;
+  shuffledQuestions: any = [] ;
   cardType: string = "questionCard";
   totalcorrect: number = 0;
   correct: string = "";
@@ -39,11 +41,15 @@ export class QuizComponent implements OnInit {
      this.route.paramMap.subscribe(params => { 
           this.quizkey = params.get('subject') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');
           this.loadData();
-          this.shuffleChoices();
-          this.correct = this.getCorrectAnswer();
+          
+
+
+
 
           
      });
+
+     
 
 
   }
@@ -59,7 +65,7 @@ export class QuizComponent implements OnInit {
 
  loadData() {
     this.subscription = this.quizService.getData().subscribe(
-      res => (this.questions = res[this.quizkey]["questions"], this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"], this.setCorrectAnswer()),
+      res => (this.getNumbers(), this.getRandomNumbers(),  this.questions = res[this.quizkey]["questions"], this.shuffleChoices(), this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"],  this.getShuffledQuestions(), this.questions = this.shuffledQuestions, this.correct = this.getCorrectAnswer(), this.setCorrectAnswer()), 
       error => console.log(error),
     );
   }
@@ -83,10 +89,32 @@ export class QuizComponent implements OnInit {
      return Number(this.correct);
   }
    
+  getNumbers(){
+     for (var x=0; x<20; x++){
+      this.numbers.push(x);
+     }
+  }
+
+  getRandomNumbers(){
+     for (var x=0; x<20; x++){
+      var numberindex = this.getRandomNumberBetween(0,this.numbers.length-1);
+      var selectedNumber = this.numbers[numberindex];
+      this.random20numbers.push(selectedNumber);
+      this.numbers.splice(numberindex,1);
+     }
+  }
   
   shuffleChoices(){
       for (var x=0; x<this.questions.length; x++){
          this.questions[x].choices = this.shuffle(this.questions[x].choices);
+      }
+  }
+
+  getShuffledQuestions(){
+
+      for (var x=0; x<20; x++){
+          var questionindex = this.random20numbers[x];
+          this.shuffledQuestions.push(this.questions[questionindex]);
       }
   }
 
