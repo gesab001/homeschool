@@ -90,7 +90,7 @@ export class QuizComponent implements OnInit {
   }
    
   getNumbers(){
-     for (var x=0; x<20; x++){
+     for (var x=0; x<100; x++){
       this.numbers.push(x);
      }
   }
