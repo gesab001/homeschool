@@ -9,6 +9,9 @@
                     <div *ngSwitchCase="'addition'" class="card-header bg-success">
                         <h1 class="text-dark text-center ">What is {{questions[questionNumber]["question"]}}?</h1>
                     </div>
+                    <div *ngSwitchCase="'numberorder'" class="card-header bg-success">
+                        <h1 class="text-dark text-center ">Put these numbers in order from smallest to biggest:  {{questions[questionNumber]["question"]}}?</h1>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-wrap" >
@@ -17,7 +20,7 @@
                     </div>
                     <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
                         <br>
-                        <button type="button" (click)="setAnswer(choice)" class="btn btn-warning">{{letterchoices[i]}}. {{choice}}</button>
+                        <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
                     </div>
 
                 </div> 
