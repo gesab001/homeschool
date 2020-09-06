@@ -14,15 +14,30 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex flex-wrap" >
-                       <div *ngFor="let item of [].constructor(getNumberOfImages()); let i = index" class="{{icon.name}} p-2" style="font-size:60px;color:lightblue;text-shadow:2px 2px 4px #000000;"></div>
-                      
-                    </div>
-                    <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
-                        <br>
-                        <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
-                    </div>
-
+                   <div [ngSwitch]="questionType"> 
+                      <div *ngSwitchCase="'count'">
+                            <div class="d-flex flex-wrap" >
+                               <div *ngFor="let item of [].constructor(getNumberOfImages()); let i = index" class="{{icon.name}} p-2" style="font-size:60px;color:lightblue;text-shadow:2px 2px 4px #000000;"></div>
+                              
+                            </div>
+                            <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                <br>
+                                <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                            </div>
+                      </div>
+                      <div *ngSwitchCase="'addition'">
+                            <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                <br>
+                                <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                            </div>
+                      </div>
+                      <div *ngSwitchCase="'numberorder'">
+                            <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                <br>
+                                <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                            </div>
+                      </div>
+                   </div> 
                 </div> 
                 <div class="card-footer">
                 
