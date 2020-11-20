@@ -73,6 +73,8 @@ export class QuizComponent implements OnInit {
   setCorrectAnswer(){
     this.correct = this.questions[this.questionNumber].answer;
     this.answerint = Number(this.correct);
+    console.log("correctanswer: " + this.answerint);
+    
   }
 
   getCorrectAnswer(){
@@ -82,6 +84,7 @@ export class QuizComponent implements OnInit {
 
   setAnswer(event){
      this.answer = event;
+     console.log("user answer :" + this.answer);
 
   }
 
@@ -127,7 +130,8 @@ export class QuizComponent implements OnInit {
     if (this.questionNumber==19){
         this.cardType = "scoreCard";
     }
-    if (this.answer==""){
+    if (this.answer==null){
+	  console.log("your answer is: " + this.answer);	
       alert("please choose an answer");
     }else{
         if(this.questions[this.questionNumber].answer  ==  this.answer){
