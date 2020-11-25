@@ -27,10 +27,13 @@
                             </div>
                       </div>
                       <div *ngSwitchCase="'addition'">
-                            <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
-                                <br>
-                                <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
-                            </div>
+					        <form #answerForm="ngForm" (keyup.enter)="onSubmit()" ><input ngModel name="answer" type="text" required /></form>
+                            <div *ngIf="multiplechoiceShow" >
+							    <div  *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                   <br>
+                                  <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                                </div>
+							</div>	
                       </div>
                       <div *ngSwitchCase="'numberorder'">
                             <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  

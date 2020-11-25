@@ -2,6 +2,9 @@
 
 ng deploy --base-href=/homeschool/
 
+sudo git pull
 sudo git add .
-sudo git commit -m "update"
+echo commit message
+read varname
+sudo git commit -m "$varname"
 sudo git push --all

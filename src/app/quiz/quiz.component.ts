@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService} from './quiz.service';
-
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-quiz',
@@ -10,6 +10,7 @@ import { QuizService} from './quiz.service';
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
+  @ViewChild("answerForm") answerForm: NgForm;
   questionType: string;
   icon: any;
   iconIndex: number;
@@ -31,6 +32,7 @@ export class QuizComponent implements OnInit {
   subscription;
   letterchoices: any = ['A', 'B', 'C', 'D'];
   questionNumber: number = 0;
+  multiplechoiceShow: boolean = true;
   congrats: any = ["correct", "excellent", "awesome", "well done", "great job", "fantastic", "all right!", "exactly right", "exceptional", "sensational", "wonderful", "fabulous", "outstanding", "You're learning fast", "perfect", "You're doing well", "Unbelievable", "Way to go", "Marvelous", "Good for you", "That's great"];
   constructor(private quizService: QuizService, private route: ActivatedRoute) { 
  
@@ -127,6 +129,8 @@ export class QuizComponent implements OnInit {
 
   onSubmit(){
     this.setIcon();
+	this.answer = this.answerForm.controls['answer'].value;
+	
     if (this.questionNumber==19){
         this.cardType = "scoreCard";
     }
@@ -141,7 +145,11 @@ export class QuizComponent implements OnInit {
             this.shuffleChoices();
             
             this.questionNumber = this.questionNumber + 1;
+			if (this.questionNumber>5){
+				 this.multiplechoiceShow = false;
+			}
             this.answer = "";
+			this.answerForm.resetForm();
             this.setCorrectAnswer();
         }else{
            this.playAudio("wrong2.mp3");
