@@ -1,5 +1,5 @@
 <div class="container-fluid" [ngSwitch]="cardType">
-  <h2 class="display-1" >Math Quiz</h2>
+  <h2 class="display-1" >{{subject.toUpperCase()}} Quiz</h2>
 
       <div *ngSwitchCase="'questionCard'" class="card" >
                 <div [ngSwitch]="questionType">
@@ -12,6 +12,9 @@
                     <div *ngSwitchCase="'numberorder'" class="card-header bg-success">
                         <h1 class="text-dark text-center ">Put these numbers in order from smallest to biggest: </h1>
                         <h1 class="text-dark text-center ">{{questions[questionNumber]["question"]}}?</h1>
+                    </div>
+					<div *ngSwitchCase="'fill_in_the_blank'" class="card-header bg-success">
+                        <h1 class="text-dark text-center ">{{questions[questionNumber]["question"]}}</h1>
                     </div>
                 </div>
                 <div class="card-body">
@@ -27,17 +30,26 @@
                             </div>
                       </div>
                       <div *ngSwitchCase="'addition'">
+						  						 
                             <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
                                 <br>
                                 <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
                             </div>
                       </div>
+
                       <div *ngSwitchCase="'numberorder'">
                             <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
                                 <br>
                                 <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
                             </div>
                       </div>
+                      <div *ngSwitchCase="'fill_in_the_blank'">
+						   
+                          <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                <br>
+                                <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                            </div> 
+                      </div>                      
                    </div> 
                 </div> 
                 <div class="card-footer">

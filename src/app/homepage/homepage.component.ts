@@ -25,7 +25,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
      this.route.paramMap.subscribe(params => { 
-          this.subject = params.get('subject');
+          this.subject = params.get('subject').toLowerCase();
           this.subjectletter = this.subject.charAt(0).toLowerCase();
           this.year = params.get('year');
           this.yearnumber = this.year.split("_")[1];

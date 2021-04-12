@@ -15,7 +15,7 @@ export class QuizService {
 
   private handleError: HandleError;
 
-  url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/math/math_questions.json';
+  url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/';
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -27,11 +27,11 @@ export class QuizService {
   }
 
 
-  getData() {
+  getData(subject, questionfilename) {
     this.clearCache();
     if (!this._data) {
       this._data = this.http
-        .get(this.url)
+        .get(this.url+subject+"/"+questionfilename)
         .pipe(publishReplay(1), refCount());
     }
     return this._data;

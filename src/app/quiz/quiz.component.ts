@@ -20,6 +20,8 @@ export class QuizComponent implements OnInit {
   random20numbers: any = [];
   icons: any;
   quizkey: string;
+  subject: string;
+  questionfilename: string;
   questions: any;
   shuffledQuestions: any = [] ;
   cardType: string = "questionCard";
@@ -39,7 +41,9 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
 
      this.route.paramMap.subscribe(params => { 
-          this.quizkey = params.get('subject') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');
+          this.quizkey = params.get('subjectletter') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');
+          this.subject = params.get('subject').toLowerCase();
+          this.questionfilename = params.get('subject').toLowerCase() + "_questions.json";
           this.loadData();
           
 
@@ -64,16 +68,16 @@ export class QuizComponent implements OnInit {
   }
 
  loadData() {
-    this.subscription = this.quizService.getData().subscribe(
-      res => (this.getNumbers(), this.getRandomNumbers(),  this.questions = res[this.quizkey]["questions"], this.shuffleChoices(), this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"],  this.getShuffledQuestions(), this.questions = this.shuffledQuestions, this.correct = this.getCorrectAnswer(), this.setCorrectAnswer()), 
+    this.subscription = this.quizService.getData(this.subject, this.questionfilename).subscribe(
+      res => (this.questions = res[this.quizkey]["questions"], this.getNumbers(), this.getRandomNumbers(),  this.shuffleChoices(), this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"],  this.getShuffledQuestions(), this.questions = this.shuffledQuestions, this.correct = this.getCorrectAnswer(), this.setCorrectAnswer()), 
       error => console.log(error),
     );
   }
 
   setCorrectAnswer(){
     this.correct = this.questions[this.questionNumber].answer;
-    this.answerint = Number(this.correct);
-    console.log("correctanswer: " + this.answerint);
+    //this.answerint = Number(this.correct);
+    console.log("correctanswer: " + this.correct);
     
   }
 
@@ -93,7 +97,7 @@ export class QuizComponent implements OnInit {
   }
    
   getNumbers(){
-     for (var x=0; x<100; x++){
+     for (var x=0; x<this.questions.length; x++){
       this.numbers.push(x);
      }
   }
@@ -108,6 +112,7 @@ export class QuizComponent implements OnInit {
   }
   
   shuffleChoices(){
+      console.log(this.questions);
       for (var x=0; x<this.questions.length; x++){
          this.questions[x].choices = this.shuffle(this.questions[x].choices);
       }
