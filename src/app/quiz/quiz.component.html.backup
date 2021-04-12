@@ -30,11 +30,21 @@
                             </div>
                       </div>
                       <div *ngSwitchCase="'addition'">
+<<<<<<< HEAD
 						  						 
                             <div *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
                                 <br>
                                 <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
                             </div>
+=======
+					        <form #answerForm="ngForm" (keyup.enter)="onSubmit()" ><input ngModel name="answer" type="text" required /></form>
+                            <div *ngIf="multiplechoiceShow" >
+							    <div  *ngFor="let choice of questions[questionNumber].choices; let i=index;">  
+                                   <br>
+                                  <button type="button" (click)="setAnswer(choice)" class="btn choice">{{letterchoices[i]}}. {{choice}}</button>
+                                </div>
+							</div>	
+>>>>>>> f0650129e4faec1c11a7d332b0f64943f3e07451
                       </div>
 
                       <div *ngSwitchCase="'numberorder'">
