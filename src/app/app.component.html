@@ -30,9 +30,9 @@
     <mat-option value="year_13">Year 13</mat-option>
   </mat-select>
 </mat-form-field>
-
+<a [routerLink]="['/homepage', selectedSubject, selectedYear]" routerLinkActive="active">Load</a>
+<a href="http://20.70.176.210/php/homeschool/insert-question.php">CREATE QUESTIONS</a>
 </nav>
 
-<a [routerLink]="['/homepage', selectedSubject, selectedYear]" routerLinkActive="active">{{selectedSubject}}, {{selectedYear}} </a>
 
 <router-outlet></router-outlet>
