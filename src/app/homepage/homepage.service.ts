@@ -13,7 +13,8 @@ export class HomepageService {
   _data: any = null;
 
   private handleError: HandleError;
-  url = 'https://gesab001.github.io/assets/homeschool/';
+  //url = 'https://gesab001.github.io/assets/homeschool/';
+  url = 'https://20.70.176.210/php/homeschool/select.php?';
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -24,11 +25,11 @@ export class HomepageService {
     this._data = null;
   }
 
-  getData(path) {
+  getData(subject, year) {
     this.clearCache();
     if (!this._data) {
       this._data = this.http
-        .get(this.url+path)
+        .get(this.url+"subject="+subject+"&year="+year)
         .pipe(publishReplay(1), refCount());
     }
     return this._data;

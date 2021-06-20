@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit {
   }
 
  loadData() {
-    this.subscription = this.homepageService.getData(this.path).subscribe(
+    this.subscription = this.homepageService.getData(this.subject, this.yearnumber).subscribe(
       res => (this.lessons = res),
       error => console.log(error),
     );
