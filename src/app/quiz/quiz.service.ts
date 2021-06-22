@@ -15,7 +15,9 @@ export class QuizService {
 
   private handleError: HandleError;
 
-  url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/';
+  //url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/';
+    url = 'https://20.70.176.210/php/homeschool/select_questions.php?subject=';
+
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -27,11 +29,11 @@ export class QuizService {
   }
 
 
-  getData(subject, questionfilename) {
+  getData(subject, title, topic, year, letter, number) {
     this.clearCache();
     if (!this._data) {
       this._data = this.http
-        .get(this.url+subject+"/"+questionfilename)
+        .get(this.url+subject+"&title="+title+"&topic="+topic+"&year="+year+"&letter="+letter+"&number="+number)
         .pipe(publishReplay(1), refCount());
     }
     return this._data;
