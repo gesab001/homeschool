@@ -16,7 +16,7 @@ export class QuizService {
   private handleError: HandleError;
 
   //url = 'https://raw.githubusercontent.com/gesab001/assets/master/homeschool/';
-    url = 'https://20.70.176.210/php/homeschool/select_questions.php?subject=';
+    url = 'https://172.20.10.4/php/homeschool/select_questions.php?subject=';
 
   constructor(
     private http: HttpClient,
