@@ -14,7 +14,7 @@ export class HomepageService {
 
   private handleError: HandleError;
   //url = 'https://gesab001.github.io/assets/homeschool/';
-  url = 'https://20.70.176.210/php/homeschool/select.php?';
+  url = 'https://172.20.10.12/php/homeschool/select.php?';
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
@@ -25,7 +25,8 @@ export class HomepageService {
     this._data = null;
   }
 
-  getData(subject, year) {
+  getData(ip, subject, year) {
+    this.url = "https://"+ip+"/php/homeschool/select.php?";
     this.clearCache();
     if (!this._data) {
       this._data = this.http

@@ -15,6 +15,7 @@ import {Observable} from 'rxjs';
 export class HomepageComponent implements OnInit {
 
   lessons: any;
+  ip: string;
   subject: string;
   subjectletter: string;
   year: string;
@@ -25,6 +26,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
      this.route.paramMap.subscribe(params => { 
+          this.ip = params.get('ipvalue').toLowerCase();
           this.subject = params.get('subject').toLowerCase();
           this.subjectletter = this.subject.charAt(0).toLowerCase();
           this.year = params.get('year');
@@ -37,7 +39,7 @@ export class HomepageComponent implements OnInit {
   }
 
  loadData() {
-    this.subscription = this.homepageService.getData(this.subject, this.yearnumber).subscribe(
+    this.subscription = this.homepageService.getData(this.ip, this.subject, this.yearnumber).subscribe(
       res => (this.lessons = res),
       error => console.log(error),
     );

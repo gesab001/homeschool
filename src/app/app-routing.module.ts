@@ -4,8 +4,8 @@ import {HomepageComponent} from './homepage/homepage.component';
 import {QuizComponent} from './quiz/quiz.component';
 
 const routes: Routes = [
-   {path: 'homepage/:subject/:year', component: HomepageComponent},
-   {path: 'quiz/:subject/:title/:topic/:subjectletter/:year/:letter/:number', component: QuizComponent}
+   {path: 'homepage/:ipvalue/:subject/:year', component: HomepageComponent},
+   {path: 'quiz/:ipvalue/:subject/:title/:topic/:subjectletter/:year/:letter/:number', component: QuizComponent}
   ];
 
 @NgModule({

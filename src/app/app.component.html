@@ -1,3 +1,11 @@
+<mat-form-field class="example-form-field" appearance="fill">
+  <mat-label>ip</mat-label>
+  <input matInput type="text" [(ngModel)]="ipvalue">
+  <button *ngIf="ipvalue" matSuffix mat-icon-button aria-label="Clear" (click)="ipvalue=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
 <nav> 
 
 <mat-form-field appearance="fill">
@@ -30,8 +38,8 @@
     <mat-option value="year_13">Year 13</mat-option>
   </mat-select>
 </mat-form-field>
-<a [routerLink]="['/homepage', selectedSubject, selectedYear]" routerLinkActive="active">Load</a>
-<a href="http://20.70.176.210/php/homeschool/insert-question.html">     CREATE QUESTIONS</a>
+<a [routerLink]="['/homepage', ipvalue, selectedSubject, selectedYear]" routerLinkActive="active">Load</a>
+<a href="http://{{ipvalue}}/php/homeschool/insert-question.html">     CREATE QUESTIONS</a>
 </nav>
 
 

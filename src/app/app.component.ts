@@ -9,4 +9,5 @@ export class AppComponent {
   title = 'homeschool';
   selectedSubject = 'math';
   selectedYear = 'kindergarten';
+  ipvalue = "";
 }

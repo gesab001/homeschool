@@ -20,6 +20,7 @@ export class QuizComponent implements OnInit {
   random20numbers: any = [];
   icons: any;
   quizkey: string;
+  ip: string;
   subject: string;
   questionfilename: string;
   questions: any;
@@ -41,10 +42,11 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
 
      this.route.paramMap.subscribe(params => { 
+          this.ip = params.get('ipvalue');
           this.quizkey = params.get('subjectletter') + params.get('year') + params.get('letter').toLowerCase() + params.get('number');
           this.subject = params.get('subject').toLowerCase();
           this.questionfilename = params.get('subject').toLowerCase() + "_questions.json";
-          this.loadData(this.subject, params.get('title'), params.get('topic'), params.get('year'), params.get('letter').toLowerCase(),params.get('number'));
+          this.loadData(this.ip, this.subject, params.get('title'), params.get('topic'), params.get('year'), params.get('letter').toLowerCase(),params.get('number'));
           
 
 
@@ -67,8 +69,8 @@ export class QuizComponent implements OnInit {
      this.icon = this.icons[this.iconIndex];
   }
 
- loadData(subject, title, topic, year, letter, number) {
-    this.subscription = this.quizService.getData(subject, title, topic, year, letter, number).subscribe(
+ loadData(ip, subject, title, topic, year, letter, number) {
+    this.subscription = this.quizService.getData(ip, subject, title, topic, year, letter, number).subscribe(
       res => (this.questions = res[this.quizkey]["questions"], this.getNumbers(), this.getRandomNumbers(),  this.shuffleChoices(), this.icons = res["icons"], this.totalIcons = res["icons"].length, this.iconIndex = this.getRandomNumberBetween(0, res["icons"].length-1), this.icon = this.icons[this.iconIndex], this.questionType = res[this.quizkey]["type"],  this.getShuffledQuestions(), this.questions = this.shuffledQuestions, this.correct = this.getCorrectAnswer(), this.setCorrectAnswer()), 
       error => console.log(error),
     );
